@@ -4,7 +4,10 @@ import { useState, useEffect } from "react";
 const Magic = () => {
   const [link, setLink] = useState("");
   const [articleLink, setArticleLink] = useState([]);
-  const [copied,setCopied] = useState("")
+  const [copied,setCopied] = useState("false")
+
+  const [clickedIndex, setClickedIndex] = useState(null);
+  
 
   const handleChange = (e) => {
     setLink(e.target.value);
@@ -35,11 +38,11 @@ const Magic = () => {
     }
   };
 
-  const handleCopy = (copyLink) => {
-    setCopied("true")
+  const handleCopy = (copyLink,index) => {
+    setClickedIndex(index);
     navigator.clipboard.writeText(copyLink)
     setTimeout(()=>{
-        setCopied("false")
+        setClickedIndex(null);
     },1000)
   };
 
@@ -68,9 +71,9 @@ const Magic = () => {
 
           {articleLink.map((item, index) => (
             <div key={index} className="magic_history">
-              <button onClick={()=>{handleCopy( item )}}>
+              <button onClick={()=>{handleCopy( item,index )}}>
                 {
-                   copied === "false" ?  <i className="fa-regular fa-copy"></i> : <i className="fa-solid fa-check"></i>
+                    clickedIndex === index ? ( <i className="fa-solid fa-check"></i> ) : ( <i className="fa-regular fa-copy"></i> )
                 }
               </button>
               <input type="text" value={item} readOnly />
