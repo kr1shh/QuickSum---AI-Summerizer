@@ -1,0 +1,34 @@
+section .hero_container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 0px;
+    font-family: 'Poppins';
+
+    h4{
+        text-align: center;
+        font-size: 45px;
+        margin: 0px;
+    }
+
+    span{
+        font-weight: 700;
+        font-size: 69px;
+        margin: 0;
+        background: #103A98;
+        background: radial-gradient(circle farthest-corner at center center, #103A98 36%, #3c71e6 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    p{
+        text-align: center;
+        width: 80%;
+        font-weight: 400;
+
+        @media(min-width:769px){
+            width: 600px;
+        }
+    }
+}
