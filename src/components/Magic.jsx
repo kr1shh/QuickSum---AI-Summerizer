@@ -1,16 +1,25 @@
 import "./Magic.scss";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 const Magic = () => {
   const [link, setLink] = useState("");
   const [articleLink, setArticleLink] = useState([]);
-  const [copied,setCopied] = useState("false")
-
   const [clickedIndex, setClickedIndex] = useState(null);
-  
+
+  const inputRef = useRef(null);
 
   const handleChange = (e) => {
     setLink(e.target.value);
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      if (e.target.value === "") {
+        return;
+      } else {
+        handleMagic();
+      }
+    }
   };
 
   const handleMagic = () => {
@@ -35,15 +44,17 @@ const Magic = () => {
 
       localStorage.setItem("history", JSON.stringify(updatedHistory));
       setArticleLink(updatedHistory);
+      inputRef.current.value = "";
+      setLink("");
     }
   };
 
-  const handleCopy = (copyLink,index) => {
+  const handleCopy = (copyLink, index) => {
     setClickedIndex(index);
-    navigator.clipboard.writeText(copyLink)
-    setTimeout(()=>{
-        setClickedIndex(null);
-    },1000)
+    navigator.clipboard.writeText(copyLink);
+    setTimeout(() => {
+      setClickedIndex(null);
+    }, 1000);
   };
 
   useEffect(() => {
@@ -60,9 +71,11 @@ const Magic = () => {
               <i className="fa-solid fa-link"></i>
             </div>
             <input
+              ref={inputRef}
               type="text"
               placeholder="Paste the article link."
               onChange={handleChange}
+              onKeyDown={handleKeyDown}
             />
             <button onClick={handleMagic} disabled={link.trim() === ""}>
               <i className="fa-solid fa-angle-right"></i>
@@ -71,10 +84,16 @@ const Magic = () => {
 
           {articleLink.map((item, index) => (
             <div key={index} className="magic_history">
-              <button onClick={()=>{handleCopy( item,index )}}>
-                {
-                    clickedIndex === index ? ( <i className="fa-solid fa-check"></i> ) : ( <i className="fa-regular fa-copy"></i> )
-                }
+              <button
+                onClick={() => {
+                  handleCopy(item, index);
+                }}
+              >
+                {clickedIndex === index ? (
+                  <i className="fa-solid fa-check"></i>
+                ) : (
+                  <i className="fa-regular fa-copy"></i>
+                )}
               </button>
               <input type="text" value={item} readOnly />
             </div>
