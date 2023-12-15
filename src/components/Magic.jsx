@@ -5,7 +5,7 @@ import { useState,useEffect } from 'react'
 const Magic = () => {
 
 const [ link , setLink ] = useState('')
-const [ articleLink, setArticleLink ] = useState('')
+const [ articleLink, setArticleLink ] = useState([])
 
 
 const handleChange = (e) => {
@@ -13,29 +13,31 @@ const handleChange = (e) => {
 }
 
 const handleMagic = () => {
-    if( link.trim() !== '' ){
+        if (link.trim() !== '') {
 
-        //Saving history to the local storage
-    
-        let history = localStorage.getItem('history');
-    
-        if (history) {
-            history = JSON.parse(history);
-            history.push(link);
-    
-            if (history.length > 5) {
-                history = history.slice(history.length - 5);
+            
+            //Saving history to the local storage
+
+
+            let history = localStorage.getItem('history');
+            let updatedHistory = [];
+      
+            if (history) {
+              updatedHistory = JSON.parse(history);
+              updatedHistory.push(link);
+      
+              if (updatedHistory.length > 5) {
+                updatedHistory = updatedHistory.slice(updatedHistory.length - 5);
+              }
+            } else {
+              updatedHistory = [link];
             }
-        } else {
-            history = [link];
-        }
-        localStorage.setItem('history', JSON.stringify(history));
-    
+      
         //Retrieving the history from the local storage
-    
-        setArticleLink(localStorage.getItem( 'history' ))
-        console.log(articleLink);
-    }
+
+            localStorage.setItem('history', JSON.stringify(updatedHistory));
+            setArticleLink(updatedHistory);
+          }
 }
 
 const handleCopy = () => {
@@ -44,9 +46,9 @@ const handleCopy = () => {
 
 useEffect(()=>{
     const storedHistory = localStorage.getItem('history');
-    setArticleLink(storedHistory);
-    console.log(articleLink);
-},[ articleLink ])
+    if( storedHistory !== null )
+    setArticleLink(JSON.parse(storedHistory));
+},[])
 
 
   return (
@@ -63,13 +65,17 @@ useEffect(()=>{
                     </button>
                 </div>
 
-                <div className="magic_history">
-                    <button onClick={ handleCopy }>
-                        <i className="fa-regular fa-copy"></i>
-                        <i className="fa-solid fa-check" style={{ display:'none' }}></i>
-                    </button>
-                    <input type="text" value='' readOnly/>
-                </div>
+                {
+                    articleLink.map(( item,index )=>(
+                        <div key={ index } className="magic_history">
+                            <button onClick={ handleCopy }>
+                                <i className="fa-regular fa-copy"></i>
+                                <i className="fa-solid fa-check" style={{ display:'none' }}></i>
+                            </button>
+                            <input type="text" value={ item } readOnly/>
+                        </div>
+                    ))
+                }
 
                 <div className="magic_summery">
                     <div className="magic_sum_title">
