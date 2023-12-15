@@ -1,5 +1,6 @@
 import Header from './components/Header'
 import Hero from './components/Hero'
+import Magic from './components/Magic'
 import './App.scss'
 
 const App = () => {
@@ -12,6 +13,7 @@ const App = () => {
         <div className="app">
           <Header/>
           <Hero/>
+          <Magic/>
         </div>
       </main>
     </>
