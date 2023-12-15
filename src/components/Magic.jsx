@@ -1,7 +1,41 @@
 import './Magic.scss'
+import { useState } from 'react'
 
 
 const Magic = () => {
+
+const [ link , setLink ] = useState('')
+
+
+const handleChange = (e) => {
+    setLink(e.target.value)
+}
+
+const handleMagic = () => {
+
+    //Saving history to the local storage
+    
+    let history = localStorage.getItem('history');
+
+    if (history) {
+        history = JSON.parse(history);
+        history.push(link);
+
+        if (history.length > 5) {
+            history = history.slice(history.length - 5);
+        }
+    } else {
+        history = [link];
+    }
+
+    localStorage.setItem('history', JSON.stringify(history));
+}
+
+const handleCopy = () => {
+
+}
+
+
   return (
     <>
         <section>
@@ -10,15 +44,16 @@ const Magic = () => {
                     <div className="link_img">
                         <i className ="fa-solid fa-link"></i>
                     </div>
-                    <input type="text" placeholder='Paste the article link.'/>
-                    <button>
+                    <input type="text" placeholder='Paste the article link.' onChange={ handleChange }/>
+                    <button onClick={ handleMagic }>
                         <i className="fa-solid fa-angle-right"></i>
                     </button>
                 </div>
 
                 <div className="magic_history">
-                    <button>
+                    <button onClick={ handleCopy }>
                         <i className="fa-regular fa-copy"></i>
+                        <i className="fa-solid fa-check" style={{ display:'none' }}></i>
                     </button>
                     <input type="text" value='' readOnly/>
                 </div>

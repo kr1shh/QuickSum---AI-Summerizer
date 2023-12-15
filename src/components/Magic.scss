@@ -59,6 +59,7 @@ section .magic_container{
         button{
             background-color: transparent;
             border: none;
+            cursor: pointer;
         }
         input{
             font-family: 'Poppins';
@@ -104,11 +105,19 @@ section .magic_container{
             justify-content: center;
             margin: 10px 0px;
             border-radius: 10px;
+            padding: 0px 20px;
             background-color: rgba($color: #ffffff, $alpha: 1.0);
 
+            @media(min-width:769px){
+                width: 540px;
+            }
+
             p{
-                width: 85%;
                 font-size: 13px;
+
+                @media(min-width:769px){
+                    font-size: 16px;
+                }
             }
         }
     }
