@@ -14,7 +14,7 @@ const handleChange = (e) => {
 const handleMagic = () => {
 
     //Saving history to the local storage
-    
+
     let history = localStorage.getItem('history');
 
     if (history) {
@@ -27,8 +27,12 @@ const handleMagic = () => {
     } else {
         history = [link];
     }
-
     localStorage.setItem('history', JSON.stringify(history));
+
+    //Retrieving the history from the local storage
+
+    console.log( localStorage.getItem( 'history' ) );
+
 }
 
 const handleCopy = () => {
