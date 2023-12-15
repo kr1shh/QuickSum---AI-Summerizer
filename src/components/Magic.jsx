@@ -1,10 +1,11 @@
 import './Magic.scss'
-import { useState } from 'react'
+import { useState,useEffect } from 'react'
 
 
 const Magic = () => {
 
 const [ link , setLink ] = useState('')
+const [ articleLink, setArticleLink ] = useState('')
 
 
 const handleChange = (e) => {
@@ -12,32 +13,40 @@ const handleChange = (e) => {
 }
 
 const handleMagic = () => {
+    if( link.trim() !== '' ){
 
-    //Saving history to the local storage
-
-    let history = localStorage.getItem('history');
-
-    if (history) {
-        history = JSON.parse(history);
-        history.push(link);
-
-        if (history.length > 5) {
-            history = history.slice(history.length - 5);
+        //Saving history to the local storage
+    
+        let history = localStorage.getItem('history');
+    
+        if (history) {
+            history = JSON.parse(history);
+            history.push(link);
+    
+            if (history.length > 5) {
+                history = history.slice(history.length - 5);
+            }
+        } else {
+            history = [link];
         }
-    } else {
-        history = [link];
+        localStorage.setItem('history', JSON.stringify(history));
+    
+        //Retrieving the history from the local storage
+    
+        setArticleLink(localStorage.getItem( 'history' ))
+        console.log(articleLink);
     }
-    localStorage.setItem('history', JSON.stringify(history));
-
-    //Retrieving the history from the local storage
-
-    console.log( localStorage.getItem( 'history' ) );
-
 }
 
 const handleCopy = () => {
 
 }
+
+useEffect(()=>{
+    const storedHistory = localStorage.getItem('history');
+    setArticleLink(storedHistory);
+    console.log(articleLink);
+},[ articleLink ])
 
 
   return (
@@ -49,7 +58,7 @@ const handleCopy = () => {
                         <i className ="fa-solid fa-link"></i>
                     </div>
                     <input type="text" placeholder='Paste the article link.' onChange={ handleChange }/>
-                    <button onClick={ handleMagic }>
+                    <button onClick={ handleMagic } disabled={ link.trim() === '' }>
                         <i className="fa-solid fa-angle-right"></i>
                     </button>
                 </div>
