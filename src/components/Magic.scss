@@ -121,5 +121,24 @@ section .magic_container{
             }
         }
     }
+    .magic_summary_error{
+        width: 80%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin: 30px;
 
+        h4{
+            margin: 0px 0px 0px 0px;
+        }
+        p{
+            margin: 0;
+            font-weight: 700;
+            span{
+                font-weight: 200;
+                color: red;
+            }
+        }
+    }
 }

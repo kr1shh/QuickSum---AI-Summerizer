@@ -6,7 +6,9 @@ const Magic = () => {
   const [link, setLink] = useState("");
   const [articleLink, setArticleLink] = useState([]);
   const [clickedIndex, setClickedIndex] = useState(null);
-  const [summery,setSummery] = useState('')
+  const [summery, setSummery] = useState("");
+  const [err, setErr] = useState({});
+  const [loading,setLoading] = useState(false)
 
   const inputRef = useRef(null);
 
@@ -49,6 +51,8 @@ const Magic = () => {
       inputRef.current.value = "";
       setLink("");
     }
+    setSummery("")
+    setLoading(true)
 
     //API Call
 
@@ -64,12 +68,16 @@ const Magic = () => {
     axios
       .request(options)
       .then((response) => {
-          let res = response.data.summary
-          setSummery( res )
-          console.log(res);
+        let res = response.data.summary;
+        setSummery(res);
+        console.log(res);
+        setLoading(false)
       })
       .catch((error) => {
         console.error("Error:", error);
+        console.log("Message:", error.message);
+        setErr(error);
+        setLoading(false)
       });
   };
 
@@ -126,25 +134,35 @@ const Magic = () => {
             </div>
           ))}
 
-
           {
-            summery ? (
+            loading ? (
+              "Loading"
+            ) : (
+              summery ? (
                 <div className="magic_summery">
-                <div className="magic_sum_title">
-                  <h4>
-                    Article <span>Summary</span>
-                  </h4>
+                  <div className="magic_sum_title">
+                    <h4>
+                      Article <span>Summary</span>
+                    </h4>
+                  </div>
+                  <div className="magic_sum_article">
+                    <p>{summery}</p>
+                  </div>
                 </div>
-                <div className="magic_sum_article">
-                  <p>
-                    { summery }
-                  </p>
-                </div>
-              </div>
-            ) : ( "" )
+              ) : (
+                err.message ? (
+                  <div className="magic_summary_error">
+                    <h4>Oops that was not supposed to be happend!</h4>
+                    <p>
+                      Error : <span>{err.message}</span>
+                    </p>
+                  </div>
+                ) : (
+                  ""
+                )
+              )
+            )
           }
-
-
         </div>
       </section>
     </>
