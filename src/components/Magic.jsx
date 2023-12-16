@@ -70,12 +70,12 @@ const Magic = () => {
       .then((response) => {
         let res = response.data.summary;
         setSummery(res);
-        console.log(res);
+        // console.log(res);
         setLoading(false)
       })
       .catch((error) => {
-        console.error("Error:", error);
-        console.log("Message:", error.message);
+        // console.error("Error:", error);
+        // console.log("Message:", error.message);
         setErr(error);
         setLoading(false)
       });
@@ -136,7 +136,7 @@ const Magic = () => {
 
           {
             loading ? (
-              "Loading"
+              <span className="magic_loader"></span>
             ) : (
               summery ? (
                 <div className="magic_summery">
