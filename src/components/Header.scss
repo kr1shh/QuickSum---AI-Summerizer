@@ -39,12 +39,11 @@ header{
                 }
             }
             span{
-                display: none;
                 font-weight: 700;
                 font-size: 18px;
-                @media(min-width:481px){
-                    display: inline;
-                }
+                // @media(min-width:481px){
+                //     display: inline;
+                // }
             }
         }
 
