@@ -6,6 +6,7 @@ const Magic = () => {
   const [link, setLink] = useState("");
   const [articleLink, setArticleLink] = useState([]);
   const [clickedIndex, setClickedIndex] = useState(null);
+  const [summery,setSummery] = useState('')
 
   const inputRef = useRef(null);
 
@@ -63,7 +64,9 @@ const Magic = () => {
     axios
       .request(options)
       .then((response) => {
-        console.log(response.data);
+          let res = response.data.summary
+          setSummery( res )
+          console.log(res);
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -123,24 +126,25 @@ const Magic = () => {
             </div>
           ))}
 
-          <div className="magic_summery">
-            <div className="magic_sum_title">
-              <h4>
-                Article <span>Summery</span>
-              </h4>
-            </div>
-            <div className="magic_sum_article">
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere
-                temporibus soluta nulla perspiciatis animi veniam, culpa
-                recusandae voluptatibus et quas corporis perferendis dolor,
-                eveniet molestiae voluptatem deserunt harum quos eum sit dicta
-                dolorum eligendi consectetur? Mollitia delectus distinctio
-                aperiam deserunt praesentium repudiandae molestiae, tempora
-                voluptates sit odit alias omnis unde.
-              </p>
-            </div>
-          </div>
+
+          {
+            summery ? (
+                <div className="magic_summery">
+                <div className="magic_sum_title">
+                  <h4>
+                    Article <span>Summary</span>
+                  </h4>
+                </div>
+                <div className="magic_sum_article">
+                  <p>
+                    { summery }
+                  </p>
+                </div>
+              </div>
+            ) : ( "" )
+          }
+
+
         </div>
       </section>
     </>
