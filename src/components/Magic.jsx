@@ -1,5 +1,6 @@
-import "./Magic.scss";
 import { useState, useEffect, useRef } from "react";
+import axios from "../API/axios";
+import "./Magic.scss";
 
 const Magic = () => {
   const [link, setLink] = useState("");
@@ -17,12 +18,12 @@ const Magic = () => {
       if (e.target.value === "") {
         return;
       } else {
-        handleMagic();
+        handleMagic(link);
       }
     }
   };
 
-  const handleMagic = () => {
+  const handleMagic = (url) => {
     if (link.trim() !== "") {
       //Saving history to the local storage
 
@@ -47,6 +48,26 @@ const Magic = () => {
       inputRef.current.value = "";
       setLink("");
     }
+
+    //API Call
+
+    const options = {
+      method: "GET",
+      url: "/summarize",
+      params: {
+        url: `${url}`,
+        length: "3",
+      },
+    };
+
+    axios
+      .request(options)
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
   };
 
   const handleCopy = (copyLink, index) => {
@@ -77,7 +98,10 @@ const Magic = () => {
               onChange={handleChange}
               onKeyDown={handleKeyDown}
             />
-            <button onClick={handleMagic} disabled={link.trim() === ""}>
+            <button
+              onClick={() => handleMagic(link)}
+              disabled={link.trim() === ""}
+            >
               <i className="fa-solid fa-angle-right"></i>
             </button>
           </div>
