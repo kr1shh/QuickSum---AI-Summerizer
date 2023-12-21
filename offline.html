@@ -1,19 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
-    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
-    <meta name="msapplication-TileColor" content="#da532c">
-    <meta name="theme-color" content="#ffffff">    
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,700;1,400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./dist/css/offline.css">    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <!-- <link rel="stylesheet" href="./dist/css/offline.css">     -->
     <title>You are OFFLINE!</title>
+    <style>
+        body {
+            margin: 0;
+        }
+
+        .main {
+            width: 100vw;
+            min-height: 100vh;
+            position: fixed;
+            display: flex;
+            justify-content: center;
+            padding: 120px 24px 160px 24px;
+            pointer-events: none;
+        }
+
+        .main:before {
+            background: radial-gradient(circle, rgba(2, 0, 36, 0) 0, #fafafa 100%);
+            position: absolute;
+            content: "";
+            z-index: 2;
+            width: 100%;
+            height: 100%;
+            top: 0;
+        }
+
+        .main:after {
+            content: "";
+            background-image: url("/src/assets/grid.svg");
+            z-index: 1;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            opacity: 0.4;
+            filter: invert(1);
+        }
+
+        .gradient {
+            height: -moz-fit-content;
+            height: fit-content;
+            z-index: 3;
+            width: 100%;
+            max-width: 640px;
+            background-image: radial-gradient(at 27% 37%, hsl(215, 98%, 61%) 0px, transparent 0%), radial-gradient(at 97% 21%, hsl(125, 98%, 72%) 0px, transparent 50%), radial-gradient(at 52% 99%, hsl(354, 98%, 61%) 0px, transparent 50%), radial-gradient(at 10% 29%, hsl(256, 96%, 67%) 0px, transparent 50%), radial-gradient(at 97% 96%, hsl(38, 60%, 74%) 0px, transparent 50%), radial-gradient(at 33% 50%, hsl(222, 67%, 73%) 0px, transparent 50%), radial-gradient(at 79% 53%, hsl(343, 68%, 79%) 0px, transparent 50%);
+            position: absolute;
+            content: "";
+            width: 100%;
+            height: 100%;
+            filter: blur(100px) saturate(150%);
+            top: 80px;
+            opacity: 0.15;
+        }
+
+        .offline_container {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-family: "Poppins";
+        }
+
+        .offline_container ._logo {
+            width: 80px;
+            overflow: hidden;
+        }
+
+        .offline_container ._logo img {
+            width: 100%;
+            -o-object-fit: cover;
+            object-fit: cover;
+        }
+
+        .offline_container h4 {
+            margin: 0;
+            font-size: 50px;
+        }
+
+        .offline_container p {
+            font-weight: 600;
+        }
+
+        .offline_container p span {
+            font-size: 25px;
+            background: #CF0A0A;
+            background: radial-gradient(circle farthest-corner at center center, #CF0A0A 86%, #630A09 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
 </head>
+
 <body>
     <div class="main">
         <div class="offline_container">
@@ -27,6 +117,7 @@
                 You are <span>OFFLINE . . .</span>
             </p>
         </div>
-    </div>  
+    </div>
 </body>
+
 </html>
