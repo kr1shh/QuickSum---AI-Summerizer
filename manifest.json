@@ -1,0 +1,32 @@
+{
+  "name": "Quick Sum AI",
+  "short_name": "Quick Sum",
+  "start_url": "./",
+  "display": "standalone",
+  "description": "AI application for summerize online articles",
+  "dir": "auto",
+  "theme_color": "#000000",
+  "background_color": "#000000",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "/android-chrome-256x256.png",
+      "sizes": "256x256",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+        "src": "/Logo-512x512.png",
+        "sizes": "512x512",
+        "type": "image/png",
+        "purpose": "any"
+      }
+  ],
+  "prefer_related_applications": false
+}
