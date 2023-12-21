@@ -1,21 +1,32 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
+<head>
+    <meta charset="UTF-8">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
     <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
     <meta name="msapplication-TileColor" content="#da532c">
-    <meta name="theme-color" content="#ffffff"> 
+    <meta name="theme-color" content="#ffffff">    
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,700;1,400&display=swap" rel="stylesheet">
-    <title>QuickSum</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-    <script src="https://kit.fontawesome.com/948a568d62.js" crossorigin="anonymous"></script>
-  </body>
+    <link rel="stylesheet" href="./dist/css/offline.css">    
+    <title>You are OFFLINE!</title>
+</head>
+<body>
+    <div class="main">
+        <div class="offline_container">
+            <div class="_logo">
+                <img src="./public/android-chrome-256x256.png" alt="">
+            </div>
+            <h4>
+                Oops!
+            </h4>
+            <p>
+                You are <span>OFFLINE . . .</span>
+            </p>
+        </div>
+    </div>  
+</body>
 </html>
